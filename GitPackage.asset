@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GitPackage
   m_EditorClassIdentifier: 
   _URL: https://github.com/BelicusBr/com.cobilas.unity.gitpackage.git
-  branch: 1.0.0
+  branch: 1.0.2
   repos: []
