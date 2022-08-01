@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.gitpackage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Cobilas git package",
   "description": "Pacote de gerenciamento de repositorios git",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.gitpackage/blob/main/LICENSE.md",
@@ -16,6 +16,6 @@
     "type": "git"
   },
   "relatedPackages": {
-    "com.cobilas.unity.management.resource": "1.0.1"
+    "com.cobilas.unity.management.resource": "1.0.2"
   }
 }
