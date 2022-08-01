@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1476676a735c0040a515cc8847f09d9, type: 3}
   m_Name: GitPackage
   m_EditorClassIdentifier: 
-  MyRepo: 
-  branch: 
+  _URL: https://github.com/BelicusBr/com.cobilas.unity.gitpackage.git
+  branch: 1.0.0
   repos: []

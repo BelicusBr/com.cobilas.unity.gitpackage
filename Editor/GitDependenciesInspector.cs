@@ -23,6 +23,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
             reorderableList_repos.elementHeight = (EditorGUIUtility.singleLineHeight * 2f) + 2f;
             reorderableList_repos.drawHeaderCallback += DrawHeaderCallback;
             reorderableList_repos.drawElementCallback += DrawElementCallback;
+            reorderableList_repos.onAddCallback += OnAddCallback;
         }
 
         public override void OnInspectorGUI() {
@@ -40,6 +41,15 @@ namespace Cobilas.Unity.Editor.GitPackage {
 
             if (GUILayout.Button("Get repos", GUILayout.Width(130)))
                 (target as GitDependencies).GetRepos();
+        }
+
+        private void OnAddCallback(ReorderableList reorderable) {
+            int size = reorderable.serializedProperty.arraySize;
+            reorderable.serializedProperty.arraySize = size = (size + 1);
+            SerializedProperty p_item = reorderable.serializedProperty.GetArrayElementAtIndex(size - 1);
+            p_item.FindPropertyRelative("start").boolValue = false;
+            p_item.FindPropertyRelative("_URL").stringValue = string.Empty;
+            p_item.FindPropertyRelative("branch").stringValue = string.Empty;
         }
 
         private void DrawHeaderCallback(Rect pos) {

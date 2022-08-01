@@ -10,5 +10,10 @@ namespace Cobilas.Unity.Editor.GitPackage {
 
         public string URL => _URL;
         public string Branch => branch;
+
+        public RepoTarget() {
+            start = false;
+            _URL = branch = string.Empty;
+        }
     }
 }
