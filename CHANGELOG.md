@@ -1,4 +1,19 @@
 # Changelog
+## [1.1.3] 17/08/2022
+### Change
+- Editor\CMDBase.cs
+### Remove
+- Editor\GitDependencies.cs
+- Editor\GitDependenciesInspector.cs
+- Editor\RepoTarget.cs
+### Add
+- Editor\partial_GitDependencyManagerWin\GitDependencyManagerWin_OnGUI.cs
+- Editor\partial_GitDependencyManagerWin\GitDependencyManagerWin_Init.cs
+- Editor\partial_GitDependencyManagerWin\GitDependencyManagerWin_GitManifest.cs
+- Editor\partial_GitDependencyManagerWin\GitDependencyManagerWin_Git.cs
+- Editor\GitManifest.cs
+- Editor\GitDependencyManagerWin.cs
+- Editor\GitDependencieItem.cs
 ## [1.0.3]04/08/2022
 - Fix CHANGELOG.md
 - Fix package.json

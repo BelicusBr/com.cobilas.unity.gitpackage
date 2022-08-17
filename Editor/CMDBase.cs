@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,5 +29,9 @@ namespace Cobilas.Unity.Editor.GitPackage {
         }
 
         private static int ListCount(ICollection collection) => collection == null ? 0 : collection.Count;
+
+        [MenuItem("Tools/Git Dependency Manager/Check PlatformID")]
+        private static void CheckPlatformID()
+            => UnityEngine.Debug.Log(Environment.OSVersion.Platform);
     }
 }
