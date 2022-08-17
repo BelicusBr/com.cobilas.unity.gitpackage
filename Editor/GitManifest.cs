@@ -14,10 +14,8 @@ namespace Cobilas.Unity.Editor.GitPackage {
         public List<string> relatedPackages;
         public List<GitDependencieItem> gitDependencies;
         [NonSerialized] private bool external;
-        [SerializeField] private string typeManifest;
 
         public bool IsExternal => external;
-        public string TypeManifest => typeManifest;
 
         public GitManifest() {
             name = "None";
@@ -43,14 +41,14 @@ namespace Cobilas.Unity.Editor.GitPackage {
 
         public static void CreateEmpytGitManifest(string relativePtah, string fileName, bool autoRefresh = true) {
             GitManifest manifest = new GitManifest();
-            manifest.typeManifest = "GitManifest";
+            manifest.name = fileName;
             CreateEmpytGitManifest(relativePtah, JsonUtility.ToJson(manifest, true), fileName, autoRefresh);
         }
 
         public static void CreateEmpytGitManifest(string relativePtah, string txt, string fileName, bool autoRefresh = true) {
             string path = Path.Combine(Path.GetDirectoryName(Application.dataPath), relativePtah);
 
-            using (FileStream file = File.Create(string.Format("{0}\\{1}.json", path, fileName))) {
+            using (FileStream file = File.Create(string.Format("{0}\\{1}.gpack", path, fileName))) {
                 byte[] bytes = Encoding.UTF8.GetBytes(txt);
                 file.Write(bytes, 0, bytes.Length);
             }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
@@ -14,22 +15,30 @@ namespace Cobilas.Unity.Editor.GitPackage {
         private ReorderableList r_gitDependencies;
         private int indexTarget;
 
+        [MenuItem("Tools/Check item")]
+        private static void CheckItem() {
+            if (Selection.activeObject == null) return;
+            Debug.Log(string.Format("Name:{0}[{1}]", Selection.activeObject.name, Selection.activeObject.GetType()));
+        }
+
         private void GetAllGitManifest() {
             manifests = new List<GitManifestItem>();
-            string[] guis = AssetDatabase.FindAssets("t:TextAsset");
+            string[] guis = AssetDatabase.FindAssets($"t:{nameof(DefaultAsset)}");
             for (int I = 0; I < (guis == null ? 0 : guis.Length); I++) {
-                TextAsset text = AssetDatabase.LoadAssetAtPath<TextAsset>(AssetDatabase.GUIDToAssetPath(guis[I]));
+                string path = AssetDatabase.GUIDToAssetPath(guis[I]);
+                if (Path.GetExtension(path) != ".gpack") continue;
+                path = Path.Combine(Path.GetDirectoryName(Application.dataPath), path);
+                string text = File.ReadAllText(path);
                 try {
                     GitManifestItem item = new GitManifestItem() {
-                        manifest = JsonUtility.FromJson<GitManifest>(text.text),
-                        path = AssetDatabase.GetAssetPath(text)
+                        manifest = JsonUtility.FromJson<GitManifest>(text),
+                        path = AssetDatabase.GUIDToAssetPath(guis[I])
                     };
                     if (RepoCacheExists(item.manifest.name, item.manifest.version)) item.manifest.SetExternal();
-                    if (item.manifest.TypeManifest != nameof(GitManifest)) continue;
                     LoadGitDependencieItem(item.manifest.gitDependencies);
                     manifests.Add(item);
-                } catch {
-
+                } catch (Exception e) {
+                    Debug.LogException(e);
                 }
             }
         }

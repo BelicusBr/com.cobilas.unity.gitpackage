@@ -1,4 +1,11 @@
 # Changelog
+## [1.1.4] 17/08/2022
+### Change
+A extenção do git manifesto foi alterado de '.json' para '.gpack'.<br/><br/>
+Ágora além do arquivo .gpack ter o mesmo nome do diretório onde foi criado<br/>
+o atributo `name` vai receber o nome do diretório com padrão em vez do valor 'None'.
+### Remove
+- Editor\GitDependencyManagerWin.cs
 ## [1.1.3] 17/08/2022
 ### Change
 - Editor\CMDBase.cs
