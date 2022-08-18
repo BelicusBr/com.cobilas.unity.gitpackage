@@ -35,19 +35,25 @@ namespace Cobilas.Unity.Editor.GitPackage {
                         path = AssetDatabase.GUIDToAssetPath(guis[I])
                     };
                     if (RepoCacheExists(item.manifest.name, item.manifest.version)) item.manifest.SetExternal();
-                    LoadGitDependencieItem(item.manifest.gitDependencies);
                     manifests.Add(item);
                 } catch (Exception e) {
                     Debug.LogException(e);
                 }
             }
+            for (int I = 0; I < manifests.Count; I++)
+                LoadGitDependencieItem(manifests[I].manifest.gitDependencies, manifests);
         }
 
-        private void LoadGitDependencieItem(List<GitDependencieItem> list) {
+        private void LoadGitDependencieItem(List<GitDependencieItem> list, List<GitManifestItem> gitManifests) {
             for (int I = 0; I < list.Count; I++) {
-                if (string.IsNullOrEmpty(list[I].PackageFilePtah)) continue;
-                list[I].textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(list[I].PackageFilePtah);
-                list[I].manifest = GetGitManifestItem(list[I].textAsset);
+                if (string.IsNullOrEmpty(list[I].name)) continue;
+                for (int J = 0; J < gitManifests.Count; J++) {
+                    if (list[I].name == gitManifests[J].manifest.name) {
+                        list[I].textAsset = AssetDatabase.LoadAssetAtPath<DefaultAsset>(gitManifests[J].path);
+                        list[I].manifest = GetGitManifestItem(gitManifests[J].path);
+                        break;
+                    }
+                }
             }
         }
 
@@ -81,12 +87,13 @@ namespace Cobilas.Unity.Editor.GitPackage {
                 GitDependencieItem temp = (GitDependencieItem)r_gitDependencies.list[i];
 
                 EditorGUI.BeginChangeCheck();
-                temp.textAsset = (TextAsset)EditorGUI.ObjectField(r, temp.textAsset, typeof(TextAsset), true);
+                temp.textAsset = (DefaultAsset)EditorGUI.ObjectField(r, temp.textAsset, typeof(DefaultAsset), true);
                 if (EditorGUI.EndChangeCheck()) {
-                    temp.manifest = GetGitManifestItem(temp.textAsset);
+                    string path = AssetDatabase.GetAssetPath(temp.textAsset);
+                    temp.manifest = GetGitManifestItem(path);
                     if (temp.manifest == null) temp.textAsset = null;
                     else {
-                        temp.PackageFilePtah = AssetDatabase.GetAssetPath(temp.textAsset);
+                        //temp.PackageFilePtah = path;
                         temp.name = temp.manifest.name;
                         temp.URL = temp.manifest.repository;
                     }
@@ -114,9 +121,9 @@ namespace Cobilas.Unity.Editor.GitPackage {
             return 0;
         }
 
-        private GitManifest GetGitManifestItem(TextAsset text) {
+        private GitManifest GetGitManifestItem(string path) {
             try {
-                return JsonUtility.FromJson<GitManifest>(text.text);
+                return JsonUtility.FromJson<GitManifest>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(Application.dataPath), path)));
             } catch {
                 return (GitManifest)null;
             }

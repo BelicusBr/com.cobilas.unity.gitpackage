@@ -1,14 +1,12 @@
-﻿using System;
-using UnityEditor;
-
-namespace Cobilas.Unity.Editor.GitPackage {
+# Git Package [PT BR] GitDependencieItem
+Classe responsavel por gardar repositório-url, branch e nome da dependência.
+```c#
     [Serializable]
     public class GitDependencieItem {
         public string URL;
         public string name;
         public string branch;
-        //public string PackageFilePtah;
-        [NonSerialized] public DefaultAsset textAsset;
+        [NonSerialized] public TextAsset textAsset;
         [NonSerialized] public GitManifest manifest;
     }
-}
+```
