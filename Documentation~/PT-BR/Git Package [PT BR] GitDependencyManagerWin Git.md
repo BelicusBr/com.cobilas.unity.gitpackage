@@ -120,7 +120,7 @@ Verifica se o repositório está presente no diretório `/GitTemp`.
         }
 ```
 ## GetProcess(CMDBase)
-Responsavel por criar o processo
+Responsável por criar o processo.
 ```c#
         private Process GetProcess(CMDBase cMDBase) {
             Process process = new Process();

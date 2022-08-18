@@ -1,5 +1,5 @@
 # Git Package [PT BR] GitDependencieItem
-Classe responsavel por gardar repositório-url, branch e nome da dependência.
+Classe responsável por guardar repositório-url, branch e nome da dependência.
 ```c#
     [Serializable]
     public class GitDependencieItem {

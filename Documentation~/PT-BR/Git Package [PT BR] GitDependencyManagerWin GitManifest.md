@@ -34,7 +34,7 @@ Procura todos os arquivos .gpack para serem carregados no gerenciador.
         }
 ```
 ## LoadGitDependencieItem(List[GitDependencieItem], List[GitManifestItem])
-Responsavel pro carregar as dependências do manifesto local.
+Responsavel por carregar as dependências do manifesto local.
 (manifesto local são aqueles que estão dentro do diretório `Packages`)
 ```c#
         private void LoadGitDependencieItem(List<GitDependencieItem> list, List<GitManifestItem> gitManifests) {

@@ -1,5 +1,5 @@
 # Git Package [PT BR] GitAddRequest
-Classe responsavel por Remover a versão aterior adicionar uma nova versão do repositório.
+Classe responsável por Remover a versão anterior adicionar uma nova versão do repositório.
 ```c#
         //GitDependencyManagerWin.GitAddRequest
         private sealed class GitAddRequest {
