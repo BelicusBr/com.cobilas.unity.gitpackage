@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.gitpackage",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "displayName": "Cobilas git package",
   "description": "Pacote de gerenciamento de repositorios git",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.gitpackage/blob/main/LICENSE.md",
@@ -13,8 +13,8 @@
     "name": "Cobilas CTB"
   },
   "keywords": [
-	"GitPackage",
-	"Git"
+    "GitPackage",
+    "Git"
   ],
   "repository": {
     "url": "https://github.com/BelicusBr/com.cobilas.unity.gitpackage.git",
