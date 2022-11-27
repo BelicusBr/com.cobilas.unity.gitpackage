@@ -13,10 +13,7 @@ namespace Cobilas.Unity.Test.Editor.GitPackage {
         public string repository;
         public List<string> relatedPackages;
         public List<GitDependencieItem> gitDependencies;
-        [NonSerialized] public byte isUp;
         [NonSerialized] private bool external;
-        [NonSerialized] public string relativePtah;
-        [NonSerialized] public int relatedPackagesIndex;
 
         public bool IsExternal => external;
 

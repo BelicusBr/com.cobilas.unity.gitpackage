@@ -1,8 +1,14 @@
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 
 namespace Cobilas.Unity.Test.Editor.GitPackage {
     public partial class GitPackageManagerWin : EditorWindow {
+
+        public static string GitPackTemp 
+            => Path.Combine(Path.GetDirectoryName(Application.dataPath), "GitPackTemp");
+        public static string GitPackCurrentVersion  => Path.Combine(GitPackTemp, "CurrentVersion");
+        //public static string GitPackOldVersion => Path.Combine(GitPackTemp, "OldVersion");
 
         [MenuItem("Window/Git Package/Git Package Manager")]
         private static void ShowWindow() {
@@ -17,7 +23,21 @@ namespace Cobilas.Unity.Test.Editor.GitPackage {
         /// <summary>
         /// This function is called when the object becomes enabled and active.
         /// </summary>
-        partial void OnEnable();
+        private void OnEnable() {
+            if (!Directory.Exists(GitPackCurrentVersion))
+                Directory.CreateDirectory(GitPackCurrentVersion);
+
+            URLGitStart();
+            GPackStart();
+        }
+
+        /// <summary>
+        /// This function is called when the MonoBehaviour will be destroyed.
+        /// </summary>
+        private void OnDestroy() {
+            GPackEnd();
+            URLGitEnd();
+        }
 
         private void OnGUI() {
             EditorGUILayout.BeginHorizontal(EditorStyles.toolbar, GUILayout.ExpandWidth(true));
