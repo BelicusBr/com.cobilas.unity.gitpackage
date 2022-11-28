@@ -14,6 +14,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
         private static void ShowWindow() {
             GitPackageManagerWin window = GetWindow<GitPackageManagerWin>();
             window.titleContent = new GUIContent("Git Package Manager");
+            window.minSize = new Vector2(670f, 500f);
             window.Show();
         }
 

@@ -154,17 +154,20 @@ namespace Cobilas.Unity.Editor.GitPackage {
                 r.y += EditorGUIUtility.singleLineHeight;
                 EditorGUI.LabelField(r, string.Format("URL: {0}", temp.URL), EditorStyles.boldLabel);
 
-                selectedRepoIndex = GetVersionIndex(temp.manifest, temp.branch);
-                if (selectedRepoIndex < 0)
-                    temp.branch = temp.manifest.relatedPackages[0];
-                selectedRepoIndex = selectedRepoIndex < 0 ? 0 : selectedRepoIndex;
-                EditorGUI.BeginChangeCheck();
                 r.y += EditorGUIUtility.singleLineHeight;
-                selectedRepoIndex = EditorGUI.Popup(r, selectedRepoIndex, temp.manifest.relatedPackages.ToArray());
-                if (EditorGUI.EndChangeCheck())
-                    temp.branch = temp.manifest.relatedPackages[selectedRepoIndex];
-
-                res.list[index] = temp;
+                if (temp.manifest != (GitManifest)null) {
+                    selectedRepoIndex = GetVersionIndex(temp.manifest, temp.branch);
+                    if (selectedRepoIndex < 0)
+                        temp.branch = temp.manifest.relatedPackages[0];
+                    selectedRepoIndex = selectedRepoIndex < 0 ? 0 : selectedRepoIndex;
+                    EditorGUI.BeginChangeCheck();
+                    selectedRepoIndex = EditorGUI.Popup(r, selectedRepoIndex, temp.manifest.relatedPackages.ToArray());
+                    if (EditorGUI.EndChangeCheck())
+                        temp.branch = temp.manifest.relatedPackages[selectedRepoIndex];
+                    res.list[index] = temp;
+                } else {
+                    EditorGUI.LabelField(r, string.Format("Version: {0}", temp.branch), EditorStyles.boldLabel);
+                }
             };
 
             return res;
