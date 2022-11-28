@@ -5,7 +5,7 @@ using UnityEditor.PackageManager;
 using System.Collections.Generic;
 using UnityEditor.PackageManager.Requests;
 
-namespace Cobilas.Unity.Test.Editor.GitPackage {
+namespace Cobilas.Unity.Editor.GitPackage {
     public partial class GitPackageManagerWin {
 
         private List<GitManifestItem> manifests;
@@ -14,6 +14,7 @@ namespace Cobilas.Unity.Test.Editor.GitPackage {
         private int selectedVersion;
         private bool modVersion;
         private ListRequest listRequest;
+        //selectedIndex
 
         private void GPackStart() {
             InitGPack();

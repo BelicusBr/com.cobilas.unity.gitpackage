@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 
-namespace Cobilas.Unity.Test.Editor.GitPackage {
-    public sealed class GitManifestItem {
+namespace Cobilas.Unity.Editor.GitPackage {
+    public sealed class GitManifestItem : ICloneable {
         public byte isUp;
         public string relativePtah;
         public int relatedPackagesIndex;
@@ -25,6 +26,20 @@ namespace Cobilas.Unity.Test.Editor.GitPackage {
         }
 
         public GitManifestItem(GitManifest current) : this(current, current) {}
+
+        public object Clone() {
+            GitManifestItem res = new GitManifestItem(null);
+            if (current == old) 
+                res.current = res.old = (GitManifest)this.current.Clone();
+            else {
+                res.current = (GitManifest)this.current.Clone();
+                res.old = (GitManifest)this.old.Clone();
+            }
+            res.isUp = this.isUp;
+            res.relativePtah = (string)this.relativePtah.Clone();
+            res.relatedPackagesIndex = this.relatedPackagesIndex;
+            return res;
+        }
 
         public string[] RelatedPackagesToArray() => RelatedPackages.ToArray();
 

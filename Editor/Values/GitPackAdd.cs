@@ -1,9 +1,8 @@
-using UnityEngine;
 using UnityEditor.Compilation;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 
-namespace Cobilas.Unity.Test.Editor.GitPackage {
+namespace Cobilas.Unity.Editor.GitPackage {
     public sealed class GitPackAdd {
         private string newVersion;
         private bool addPostCompile;

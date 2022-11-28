@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace Cobilas.Unity.Test.Editor.GitPackage {
+namespace Cobilas.Unity.Editor.GitPackage {
     public partial class GitPackageManagerWin {
 
         private bool ToolbarButton(string text)

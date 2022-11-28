@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-namespace Cobilas.Unity.Test.Editor.GitPackage {
+namespace Cobilas.Unity.Editor.GitPackage {
     public partial class GitPackageManagerWin : EditorWindow {
 
         public static string GitPackTemp 
@@ -37,11 +37,17 @@ namespace Cobilas.Unity.Test.Editor.GitPackage {
         private void OnDestroy() {
             GPackEnd();
             URLGitEnd();
+            AssetDatabase.Refresh();
         }
 
         private void OnGUI() {
             EditorGUILayout.BeginHorizontal(EditorStyles.toolbar, GUILayout.ExpandWidth(true));
+                EditorGUI.BeginChangeCheck();
                 selectedIndex = ToolbarPopup(selectedIndex, manifestNames.ToArray());
+                if (EditorGUI.EndChangeCheck()) {
+                    ResetReorderableList();
+                    RevertDependences();
+                }
                 EditorGUI.BeginDisabledGroup(IsSearch());
                 if (ToolbarButton("Add URL"))
                     layer = 0;
