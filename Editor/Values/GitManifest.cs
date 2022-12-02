@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Cobilas.Unity.Editor.GitPackage {
     [Serializable]
-    public class GitManifest {
+    public class GitManifest : ICloneable {
         public string name;
         public string version;
         public string repository;
@@ -25,6 +25,24 @@ namespace Cobilas.Unity.Editor.GitPackage {
         }
 
         internal void SetExternal() => external = true;
+        
+        public object Clone() {
+            string[] relatedPackagesCopy = new string[relatedPackages.Count];
+            GitDependencieItem[] gitDependenciesCopy = new GitDependencieItem[gitDependencies.Count];
+
+            GitManifest res = new GitManifest();
+            res.name = (string)name.Clone();
+            res.version = (string)version.Clone();
+            res.repository = (string)repository.Clone();
+            if (relatedPackages.Count != 0)
+                relatedPackages.CopyTo(relatedPackagesCopy);
+            if (gitDependencies.Count != 0)
+                gitDependencies.CopyTo(gitDependenciesCopy);
+            res.external = this.external;
+            res.gitDependencies = new List<GitDependencieItem>(gitDependenciesCopy);
+            res.relatedPackages = new List<string>(relatedPackagesCopy);
+            return res;
+        }
 
         [MenuItem("Assets/Create/Git Dependency Manager/Create Empyt GitManifest")]
         public static void CreateEmpytGitManifest() {
@@ -55,5 +73,16 @@ namespace Cobilas.Unity.Editor.GitPackage {
             if (autoRefresh)
                 AssetDatabase.Refresh();
         }
+
+        public static void UnloadManifest(GitManifest manifest, string relativePtah) {
+            string txt = JsonUtility.ToJson(manifest, true);
+            relativePtah = Path.Combine(Path.GetDirectoryName(Application.dataPath), relativePtah);
+            using (StreamWriter writer = new StreamWriter(File.Create(relativePtah)))
+                writer.Write(txt);
+            //File.WriteAllText(relativePtah, txt);
+        }
+
+        public static GitManifest LoadManifest(string relativePtah)
+            => JsonUtility.FromJson<GitManifest>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(Application.dataPath), relativePtah)));
     }
 }
