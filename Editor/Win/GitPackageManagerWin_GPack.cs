@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager;
@@ -11,7 +11,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
         private List<GitManifestItem> manifests;
         private List<string> manifestNames;
         private Vector2 scrollView;
-        private int selectedVersion;
+        private readonly int selectedVersion;
         private bool modVersion;
         private ListRequest listRequest;
         //selectedIndex
@@ -44,7 +44,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
         }
 
         private bool SelectedItemIsExternal()
-            => manifests.Count == 0 || selectedIndex < 0 ? true : manifests[selectedIndex].IsExternal;
+            => manifests.Count == 0 || selectedIndex < 0 || manifests[selectedIndex].IsExternal;
 
         private bool IsSearch()
             => listRequest != (ListRequest)null;

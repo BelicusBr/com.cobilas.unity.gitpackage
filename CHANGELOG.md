@@ -1,4 +1,8 @@
 # Changelog
+## [1.1.7] - 30/01/2023
+### Changed
+- Ouve uma simplificação em funções nas classes `GitPackageManagerWin_GPack` e `GitManifestItem`.
+
 ## [1.1.4] 17/08/2022
 ### Change
 A extenção do git manifesto foi alterado de '.json' para '.gpack'.<br/><br/>

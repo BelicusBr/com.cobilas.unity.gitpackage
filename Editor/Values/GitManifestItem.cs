@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Cobilas.Unity.Editor.GitPackage {
@@ -18,7 +18,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
             => current == (GitManifest)null ? new List<string>() : current.relatedPackages;
         public List<GitDependencieItem> GitDependencies 
             => current == (GitManifest)null ? new List<GitDependencieItem>() : old.gitDependencies;
-        public bool IsExternal => current == (GitManifest)null ? false : current.IsExternal;
+        public bool IsExternal => current != (GitManifest)null && current.IsExternal;
 
         public GitManifestItem(GitManifest current, GitManifest old) {
             this.current = current;
