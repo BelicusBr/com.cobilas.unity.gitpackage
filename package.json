@@ -22,5 +22,9 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@BelicusBr"
+  },
+  "dependencies": {
+    "com.cobilas.core": "https://github.com/BelicusBr/com.cobilas.core.git",
+	"com.cobilas.unity.extensions": "https://github.com/BelicusBr/com.cobilas.unity.extensions.git"
   }
 }
