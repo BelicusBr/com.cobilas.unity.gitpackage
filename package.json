@@ -8,7 +8,7 @@
   "documentationUrl": "https://github.com/BelicusBr/com.cobilas.unity.gitpackage/wiki",
   "unity": "2019.4",
   "unityRelease": "0b5",
-  "type": "git-repo",
+  "type": "tool",
   "author": {
     "name": "Cobilas CTB"
   },
@@ -22,9 +22,5 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@BelicusBr"
-  },
-  "dependencies": {
-    "com.cobilas.core": "https://github.com/BelicusBr/com.cobilas.core.git",
-	"com.cobilas.unity.extensions": "https://github.com/BelicusBr/com.cobilas.unity.extensions.git"
   }
 }
