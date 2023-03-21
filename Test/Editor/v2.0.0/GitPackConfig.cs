@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Cobilas.Unity.Editor.GitPackage {
     [Serializable]

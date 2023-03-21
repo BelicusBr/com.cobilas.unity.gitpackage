@@ -23,8 +23,8 @@ namespace Cobilas.Unity.Editor.GitPackage {
                 config = new GitPack();
             }
             revert = (GitPack)config.Clone();
-            configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
-            relatedPackagesList = CreateReorderableList<string>(config.relatedPackages);
+            //configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
+            //relatedPackagesList = CreateReorderableList<string>(config.relatedPackages);
         }
 
         public override void OnDisable() {
@@ -34,7 +34,7 @@ namespace Cobilas.Unity.Editor.GitPackage {
 
         public override void OnInspectorGUI() {
             ++EditorGUI.indentLevel;
-            config.useBranchs = EditorGUILayout.Toggle("Use branchs", config.useBranchs);
+            //config.useBranchs = EditorGUILayout.Toggle("Use branchs", config.useBranchs);
             config.name = EditorGUILayout.TextField("Name", config.name);
             config.version = EditorGUILayout.TextField("Version", config.version);
             config.repository = EditorGUILayout.TextField("Repository", config.repository);
@@ -53,12 +53,12 @@ namespace Cobilas.Unity.Editor.GitPackage {
                 GitBash.Unload<GitPack>(config, Path.Combine(Path.GetDirectoryName(Application.dataPath), AssetDatabase.GetAssetPath(target)));
                 revert?.Dispose();
                 revert = (GitPack)config.Clone();
-                configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
+                //configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
             }
             if (GUILayout.Button("Revet", GUILayout.Width(95f))) {
                 config?.Dispose();
                 config = (GitPack)revert.Clone();
-                configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
+                //configList = CreateReorderableList<string>(config.IginoreTagsOrBranchs);
             }
             EditorGUILayout.EndHorizontal();
         }
