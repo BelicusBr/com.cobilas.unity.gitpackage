@@ -68,8 +68,8 @@ namespace Cobilas.Unity.Editor.GitPackage {
                 UnityEngine.Debug.Log("OutPut: " + e.Data);
             };
             UnityEngine.Debug.Log(process.Start());
-            process.BeginErrorReadLine();
             process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
             process.WaitForExit();
         }
 
